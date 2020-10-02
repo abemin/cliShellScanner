@@ -58,6 +58,10 @@ for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'login_s
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e '0x1999' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'multipart/form-data' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'base64_encode' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'base64_decode' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'eval' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'function' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Obfuscation' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'proxy' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'getenv' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'exec' >> ./recon/semifinal.txt;done
