@@ -4,9 +4,9 @@ directory=$1
 
 if [ -z "$1" ]
   then
-    echo "Usage: ./cliShellScanner.ah <root website directory>"
-	echo "Example Usage: ./cliShellScanner.ah /var/www/html/"
-	exit
+    echo "Usage: ./cliShellScanner.sh <root website directory>"
+    echo "Example Usage: ./cliShellScanner.sh /var/www/html/"
+  exit
 fi
 
 ######################################################
@@ -14,12 +14,11 @@ fi
 #
 
 if [ ! -d "recon" ];then
-	  rm -rf recon
       mkdir recon
 fi
 
 ######################################################
-#Shell Files 
+#Common Shell Files extension
 #
 
 echo "[+] Harvesting shell files using common shell file extension..."
@@ -28,6 +27,10 @@ find $directory -type f -name '*.php4' >> ./recon/qualifier.txt
 find $directory -type f -name '*.php5' >> ./recon/qualifier.txt
 find $directory -type f -name '*.phtml' >> ./recon/qualifier.txt
 sleep 1
+
+######################################################
+#PHP Shell Files extension
+#
 
 echo "[+] Harvesting shell files using PHP file extension..."
 find $directory -type f -name '*.php' >> ./recon/quaterfinal.txt
@@ -50,6 +53,10 @@ for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'dbname'
 
 echo "[+] Harvesting done..."
 sleep 1
+
+######################################################
+#Finalizing file list
+#
 
 echo "[+] Sorting and removing duplicates line..."
 sort ./recon/qualifier.txt | uniq > ./recon/final.txt
