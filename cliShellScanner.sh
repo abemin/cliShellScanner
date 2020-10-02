@@ -56,6 +56,18 @@ for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e '/etc/pa
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'dbname' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'login_shell' >> ./recon/semifinal.txt;done
 for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e '0x1999' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'multipart/form-data' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'base64_encode' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'proxy' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'getenv' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'exec' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'public_html' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'getcwd' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'md5_pass' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'download' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Brute' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Backdoor' >> ./recon/semifinal.txt;done
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Encoder' >> ./recon/semifinal.txt;done
 sleep 1
 
 echo "[+] Harvesting done..."
