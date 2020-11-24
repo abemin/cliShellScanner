@@ -26,7 +26,7 @@ find $directory -type f -name '*.php3' >> ./recon/qualifier.txt
 find $directory -type f -name '*.php4' >> ./recon/qualifier.txt
 find $directory -type f -name '*.php5' >> ./recon/qualifier.txt
 find $directory -type f -name '*.phtml' >> ./recon/qualifier.txt
-#find $directory -type f -name '*.php' >> ./recon/qualifier.txt
+find $directory -type f -name '*.php' >> ./recon/qualifier.txt
 find $directory -type f -name '*.php3.*' >> ./recon/qualifier.txt
 find $directory -type f -name '*.php4.*' >> ./recon/qualifier.txt
 find $directory -type f -name '*.php5.*' >> ./recon/qualifier.txt
@@ -137,18 +137,50 @@ sleep 1
 #Finalizing file list
 #
 
-echo "[+] Sorting and removing duplicates line..."
+echo "[+] Sorting files..."
 sort ./recon/semifinal1.txt | uniq > ./recon/prefinal.txt
 sort ./recon/semifinal.txt | uniq >> ./recon/prefinal.txt
 sleep 1
 
-
+echo "[+] Checking files for false positive..."
 STRING="view.html.php"
 for checkfile in $(cat ./recon/prefinal.txt);do 
 	if [[ "$checkfile" != *"$STRING"* ]];then
-		echo $checkfile >> ./recon/final.txt
+		echo $checkfile >> ./recon/prefinal1.txt
 	fi
 done
+
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'GNU' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'RSS' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'BSD' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'opensource' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'license' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'LICENSE' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'MIT' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'ISO-8859-1' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Redistributions' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'framework' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'WARRANTY' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Annex' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Cyrillic' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'nodecounter' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Sodium' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'sodium' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'PHPMailer' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'log-level' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Unicode' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'unicode' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'namespace' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'composer' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'ReCaptcha' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'www.php.net' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'PCRE' >> ./recon/prefinal2.txt;done
+
+echo "[+] Sorting and removing duplicates line..."
+cat ./recon/prefinal1.txt > ./recon/prefinal3.txt
+cat ./recon/prefinal2.txt >> ./recon/prefinal3.txt
+sort ./recon/prefinal3.txt | uniq -u >> ./recon/final.txt
+sleep 1
 
 echo "[+] Deleting temp files..."
 rm -rf ./recon/qualifier.txt
@@ -156,6 +188,9 @@ rm -rf ./recon/quaterfinal.txt
 rm -rf ./recon/semifinal.txt
 rm -rf ./recon/semifinal1.txt
 rm -rf ./recon/prefinal.txt
+rm -rf ./recon/prefinal1.txt
+rm -rf ./recon/prefinal2.txt
+rm -rf ./recon/prefinal3.txt
 sleep 1
 
 echo "[+] Suspected shell are in "$directory"recon/final.txt"
