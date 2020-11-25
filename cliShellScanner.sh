@@ -2,6 +2,10 @@
 
 directory=$1
 
+######################################################
+#Usage 
+#
+
 if [ -z "$1" ]
   then
     echo "Usage: ./cliShellScanner.sh <root website directory>"
@@ -10,7 +14,7 @@ if [ -z "$1" ]
 fi
 
 ######################################################
-#Directory 
+#Create Directory 
 #
 
 if [ ! -d "recon" ];then
@@ -18,70 +22,19 @@ if [ ! -d "recon" ];then
 fi
 
 ######################################################
-#Common Shell Files extension
+#Finding Shell Files extension
 #
 
 echo "[+] Harvesting shell files using common shell file extension..."
-find $directory -type f -name '*.php3' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php4' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php5' >> ./recon/qualifier.txt
-find $directory -type f -name '*.phtml' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php3.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php4.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php5.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.phtml.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.phar.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.php.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.pl.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.py.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.cgi.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.asp.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.js.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.html.*' >> ./recon/qualifier.txt
-find $directory -type f -name '*.htm.*' >> ./recon/qualifier.txt
+find $directory -type f \( -name '*.php3' -o -name '*.php4' -o -name '*.php5' -o -name '*.phtml' -o -name '*.php' -o -name '*.pl' -o -name '*.py' -o -name '*.cgi' -o -name '*.asp' -o -name '*.html' -o -name '*.htm.*'-o -name '*.php3.*' -o -name '*.php4.*' -o -name '*.php5.*' -o -name '*.phtml.*' -o -name '*.phar.*' -o -name '*.php.*' -o -name '*.pl.*' -o -name '*.py.*' -o -name '*.cgi.*' -o -name '*.asp.*' -o -name '*.js.*' -o -name '*.html' -o -name '*.htm'  \) >> ./recon/qualifier.txt
 sleep 1
 
 ######################################################
-#Common Shell Files extension
+#Common content for shell
 #
 
-echo "[+] Finding common unique shell string inside file extensions..."
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'IndoXploit' >> ./recon/semifinal1.txt; done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'b374k' >> ./recon/semifinal1.txt; done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'c99' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'R57' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'shell' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'Shell' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'Sh3ll' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'bindport' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'exploit' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'sha1' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'chunk_split' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'back_connect' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'backdoor' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'file_uploads' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'netcat' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e '/etc/passwd' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'dbname' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'login_shell' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e '0x1999' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'multipart/form-data' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'base64_encode' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'base64_decode' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'eval' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'function' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'Obfuscation' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'proxy' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'getenv' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'exec' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'public_html' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'getcwd' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'md5_pass' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'download' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'Brute' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'Backdoor' >> ./recon/semifinal1.txt;done
-for shellfile in $(cat ./recon/qualifier.txt);do grep -rnwl $shellfile -e 'Encoder' >> ./recon/semifinal1.txt;done
+echo "[+] Finding unique string inside file extensions..."
+for shellfile in $(cat ./recon/qualifier.txt);do grep -rnl -E 'IndoXploit'\|'b374k'\|'c99'\|'R57'\|'shell'\|'Shell'\|'Sh3ll'\|'bindport'\|'exploit'\|'sha1'\|'chunk_split'\|'back_connect'\|'backdoor'\|'file_uploads'\|'netcat'\|'/etc/passwd'\|'dbname'\|'login_shell'\|'hacked'\|'Hacked'\|'0x1999'\|'multipart/form-data'\|'base64_encode'\|'base64_decode'\|'eval'\|'function'\|'Obfuscation'\|'proxy'\|'getenv'\|'exec'\|'public_html'\|'getcwd'\|'md5_pass'\|'download'\|'Brute'\|'Backdoor'\|'Encoder'\|'urldecode'\|'defaced'\|'deface'\|'Defaced'\|'Legion'\|'Touched By'\|'WORM'\|'INTRUDER' $shellfile >> ./recon/semifinal1.txt; done
 sleep 1
 
 ######################################################
@@ -92,42 +45,8 @@ echo "[+] Harvesting PHP file created & modified 30 days ago..."
 find $directory -type f -name '*.php' -mtime -30 >> ./recon/quaterfinal.txt
 sleep 1
 
-echo "[+] Finding common unique shell string inside PHP files..."
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'IndoXploit' >> ./recon/semifinal.txt; done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'b374k' >> ./recon/semifinal.txt; done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'c99' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'R57' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'shell' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Shell' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Sh3ll' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'bindport' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'exploit' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'sha1' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'chunk_split' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'back_connect' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'backdoor' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'file_uploads' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'netcat' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e '/etc/passwd' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'dbname' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'login_shell' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e '0x1999' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'multipart/form-data' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'base64_encode' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'base64_decode' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'eval' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'function' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Obfuscation' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'proxy' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'getenv' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'exec' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'public_html' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'getcwd' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'md5_pass' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'download' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Brute' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Backdoor' >> ./recon/semifinal.txt;done
-for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnwl $phpfile -e 'Encoder' >> ./recon/semifinal.txt;done
+echo "[+] Finding unique string inside PHP file extensions..."
+for phpfile in $(cat ./recon/quaterfinal.txt);do grep -rnl -E 'IndoXploit'\|'b374k'\|'c99'\|'R57'\|'shell'\|'Shell'\|'Sh3ll'\|'bindport'\|'exploit'\|'sha1'\|'chunk_split'\|'back_connect'\|'backdoor'\|'file_uploads'\|'netcat'\|'/etc/passwd'\|'dbname'\|'login_shell'\|'hacked'\|'Hacked'\|'0x1999'\|'multipart/form-data'\|'base64_encode'\|'base64_decode'\|'eval'\|'function'\|'Obfuscation'\|'proxy'\|'getenv'\|'exec'\|'public_html'\|'getcwd'\|'md5_pass'\|'download'\|'Brute'\|'Backdoor'\|'Encoder'\|'urldecode'\|'defaced'\|'deface'\|'Defaced'\|'Legion'\|'Touched By'\|'WORM'\|'INTRUDER' $phpfile >> ./recon/semifinal.txt; done
 sleep 1
 
 echo "[+] Harvesting done..."
@@ -150,35 +69,11 @@ for checkfile in $(cat ./recon/prefinal.txt);do
 	fi
 done
 
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'GNU' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'RSS' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'BSD' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'opensource' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'license' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'LICENSE' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'MIT' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'ISO-8859-1' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Redistributions' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'framework' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'WARRANTY' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Annex' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Cyrillic' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'nodecounter' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Sodium' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'sodium' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'PHPMailer' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'log-level' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'Unicode' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'unicode' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'namespace' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'composer' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'ReCaptcha' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'www.php.net' >> ./recon/prefinal2.txt;done
-for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnwl $stringfile -e 'PCRE' >> ./recon/prefinal2.txt;done
+for stringfile in $(cat ./recon/prefinal1.txt);do grep -rnl -E 'GNU'\|'BSD'\|'opensource'\|'Opensource'\|'license'\|'LICENSE'\|'MIT'\|'ISO-8859-1'\|'Redistributions'\|'framework'\|'WARRANTY'\|'Annex'\|'Cyrillic'\|'nodecounter'\|'Sodium'\|'sodium'\|'PHPMailer'\|'log-level'\|'Unicode'\|'unicode'\|'namespace'\|'composer'\|'ReCaptcha'\|'www.php.net'\|'PCRE'\|'ASCII'\|'UTF-8'\|'utf-8' $stringfile  >> ./recon/prefinal2.txt;done
 
 echo "[+] Sorting and removing duplicates line..."
-cat ./recon/prefinal1.txt > ./recon/prefinal3.txt
-cat ./recon/prefinal2.txt >> ./recon/prefinal3.txt
+sort ./recon/prefinal1.txt | uniq > ./recon/prefinal3.txt
+sort ./recon/prefinal2.txt | uniq >> ./recon/prefinal3.txt
 sort ./recon/prefinal3.txt | uniq -u >> ./recon/final.txt
 sleep 1
 
